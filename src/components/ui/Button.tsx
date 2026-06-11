@@ -8,7 +8,7 @@ interface ButtonProps {
   variant?: "primary" | "outline" | "ghost";
   size?: "sm" | "md" | "lg";
   className?: string;
-  onClick?: () => void;
+  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
   type?: "button" | "submit";
   disabled?: boolean;
 }

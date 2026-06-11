@@ -6,7 +6,7 @@ import { ReactNode, useRef, useState } from "react";
 interface MagneticButtonProps {
   children: ReactNode;
   className?: string;
-  onClick?: () => void;
+  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export default function MagneticButton({ children, className = "", onClick }: MagneticButtonProps) {
