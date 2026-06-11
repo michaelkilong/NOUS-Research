@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-white text-text antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    @apply bg-primary/20 text-text;
+  }
+
+  /* Mobile tap highlight */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer components {
+  .prose-red {
+    @apply prose prose-slate max-w-none;
+  }
+
+  .prose-red h1 {
+    @apply text-2xl sm:text-3xl font-bold text-text mb-4;
+  }
+
+  .prose-red h2 {
+    @apply text-xl sm:text-2xl font-semibold text-text mt-8 mb-4;
+  }
+
+  .prose-red h3 {
+    @apply text-lg sm:text-xl font-semibold text-text mt-6 mb-3;
+  }
+
+  .prose-red p {
+    @apply text-text leading-relaxed mb-4;
+  }
+
+  .prose-red ul {
+    @apply list-disc pl-6 mb-4 space-y-1;
+  }
+
+  .prose-red ol {
+    @apply list-decimal pl-6 mb-4 space-y-1;
+  }
+
+  .prose-red blockquote {
+    @apply border-l-4 border-primary pl-4 italic text-text-muted my-6;
+  }
+
+  .prose-red pre {
+    @apply bg-gray-900 text-gray-100 rounded-lg p-4 overflow-x-auto my-4;
+    position: relative;
+  }
+
+  .prose-red code {
+    @apply bg-gray-100 text-primary px-1.5 py-0.5 rounded text-sm font-mono;
+  }
+
+  .prose-red pre code {
+    @apply bg-transparent text-gray-100 px-0 py-0;
+  }
+
+  .prose-red a {
+    @apply text-primary underline underline-offset-2 hover:text-primary-dark;
+  }
+
+  .prose-red img {
+    @apply rounded-lg my-4 max-w-full h-auto;
+  }
+
+  .prose-red hr {
+    @apply border-border my-8;
+  }
+
+  .prose-red .video-wrapper {
+    @apply relative w-full my-4;
+    padding-bottom: 56.25%;
+  }
+
+  .prose-red .video-wrapper iframe {
+    @apply absolute inset-0 w-full h-full rounded-lg;
+  }
+}
+
+@layer utilities {
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
