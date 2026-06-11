@@ -1,5 +1,7 @@
 "use client";
 
+import React from "react";
+
 import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
@@ -151,7 +153,7 @@ export default function EditProjectPage() {
             <p className="text-text-muted">Update project details and media.</p>
           </div>
         </div>
-        <Button onClick={handleSubmit} disabled={saving}>
+        <Button onClick={() => handleSubmit({ preventDefault: () => {} } as any)} disabled={saving}>
           <Save size={18} className="mr-2" />
           {saving ? "Saving..." : "Save"}
         </Button>

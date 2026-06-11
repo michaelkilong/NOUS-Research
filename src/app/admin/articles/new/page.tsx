@@ -1,5 +1,7 @@
 "use client";
 
+import React from "react";
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -75,7 +77,7 @@ export default function NewArticlePage() {
             <Eye size={18} className="mr-2" />
             {preview ? "Edit" : "Preview"}
           </Button>
-          <Button onClick={handleSubmit} disabled={saving}>
+          <Button onClick={() => handleSubmit({ preventDefault: () => {} } as any)} disabled={saving}>
             <Save size={18} className="mr-2" />
             {saving ? "Saving..." : "Save"}
           </Button>

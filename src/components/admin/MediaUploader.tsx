@@ -1,5 +1,7 @@
 "use client";
 
+import React from "react";
+
 import { useState, useRef } from "react";
 import { Upload, X, Image as ImageIcon, Video } from "lucide-react";
 import { cn } from "@/lib/utils";

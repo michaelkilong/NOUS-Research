@@ -1,5 +1,7 @@
 "use client";
 
+import React from "react";
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -105,7 +107,7 @@ export default function NewProjectPage() {
             <p className="text-text-muted">Create a new portfolio project.</p>
           </div>
         </div>
-        <Button onClick={handleSubmit} disabled={saving}>
+        <Button onClick={() => handleSubmit({ preventDefault: () => {} } as any)} disabled={saving}>
           <Save size={18} className="mr-2" />
           {saving ? "Saving..." : "Save"}
         </Button>
