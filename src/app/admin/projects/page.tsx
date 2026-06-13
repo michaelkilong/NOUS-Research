@@ -15,18 +15,24 @@ export default function AdminProjectsPage() {
   const [filtered, setFiltered] = useState<Project[]>([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const router = useRouter();
 
   useEffect(() => {
     fetch("/api/projects")
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch");
+        return res.json();
+      })
       .then((data) => {
-        setProjects(data);
-        setFiltered(data);
+        const projectsData = Array.isArray(data) ? data : [];
+        setProjects(projectsData);
+        setFiltered(projectsData);
         setLoading(false);
       })
       .catch((err) => {
         console.error(err);
+        setError("Failed to load projects");
         setLoading(false);
       });
   }, []);
@@ -57,6 +63,28 @@ export default function AdminProjectsPage() {
       console.error(error);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-red-500">{error}</p>
+        <button
+          onClick={() => window.location.reload()}
+          className="mt-4 px-4 py-2 bg-primary text-white rounded-lg"
+        >
+          Retry
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div>
