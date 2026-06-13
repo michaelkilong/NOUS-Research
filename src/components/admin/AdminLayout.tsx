@@ -27,8 +27,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  // Use window.location for redirect to avoid Next.js router issues
-  if (typeof window !== "undefined" && status === "unauthenticated" && pathname !== "/admin/login") {
+  if (typeof window !== "undefined" && status === "unauthenticated" && pathname !== "/login") {
     window.location.href = "/login";
     return (
       <div className="min-h-screen flex items-center justify-center bg-surface-alt">
@@ -126,7 +125,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </div>
           </div>
           <button
-            onClick={() => signOut({ callbackUrl: "/admin/login" })}
+            onClick={() => signOut({ callbackUrl: "/login" })}
             className="flex items-center gap-3 px-3 py-2.5 w-full rounded-xl text-sm text-text-muted hover:bg-red-50 hover:text-red-600 transition-colors duration-200"
           >
             <LogOut size={18} />
