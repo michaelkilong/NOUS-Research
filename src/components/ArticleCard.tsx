@@ -21,7 +21,7 @@ export default function ArticleCard({ article, featured = false }: ArticleCardPr
               src={article.coverImage}
               alt={article.title}
               fill
-              className="object-cover transition-transform duration-500 hover:scale-105"
+              className="object-cover"
             />
           </div>
         )}

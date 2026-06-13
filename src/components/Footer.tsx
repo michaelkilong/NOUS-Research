@@ -5,8 +5,8 @@ export default function Footer() {
   return (
     <footer className="bg-white border-t border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div className="sm:col-span-2 lg:col-span-1">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="sm:col-span-1">
             <Link href="/" className="text-xl font-bold text-primary">
               Nous NLP
             </Link>
@@ -53,16 +53,6 @@ export default function Footer() {
                 <Mail size={20} />
               </a>
             </div>
-          </div>
-
-          <div>
-            <h3 className="font-semibold text-text mb-3">Admin</h3>
-            <Link
-              href="/admin"
-              className="text-sm text-text-muted hover:text-primary transition-colors"
-            >
-              Dashboard
-            </Link>
           </div>
         </div>
 

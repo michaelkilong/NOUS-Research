@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Image from "next/image";
 import { ExternalLink, Github } from "lucide-react";
 import Card from "./ui/Card";
@@ -17,7 +16,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           src={project.thumbnail}
           alt={project.title}
           fill
-          className="object-cover transition-transform duration-500 hover:scale-105"
+          className="object-cover"
         />
       </div>
       <div className="p-5">
