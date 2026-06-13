@@ -15,18 +15,24 @@ export default function AdminArticlesPage() {
   const [filtered, setFiltered] = useState<Article[]>([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const router = useRouter();
 
   useEffect(() => {
     fetch("/api/articles")
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch");
+        return res.json();
+      })
       .then((data) => {
-        setArticles(data);
-        setFiltered(data);
+        const articlesData = Array.isArray(data) ? data : [];
+        setArticles(articlesData);
+        setFiltered(articlesData);
         setLoading(false);
       })
       .catch((err) => {
         console.error(err);
+        setError("Failed to load articles");
         setLoading(false);
       });
   }, []);
@@ -57,6 +63,28 @@ export default function AdminArticlesPage() {
       console.error(error);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-red-500">{error}</p>
+        <button
+          onClick={() => window.location.reload()}
+          className="mt-4 px-4 py-2 bg-primary text-white rounded-lg"
+        >
+          Retry
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div>
