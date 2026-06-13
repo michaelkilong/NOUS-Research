@@ -1,8 +1,6 @@
 "use client";
 
 import { useSession, signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -12,7 +10,6 @@ import {
   Image as ImageIcon,
   LogOut,
   Menu,
-  X,
   ChevronLeft,
 } from "lucide-react";
 import { useState } from "react";
@@ -27,22 +24,25 @@ const navItems = [
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const { data: session, status } = useSession();
-  const router = useRouter();
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/admin/login");
-    }
-  }, [status, router]);
+  // Use window.location for redirect to avoid Next.js router issues
+  if (typeof window !== "undefined" && status === "unauthenticated" && pathname !== "/admin/login") {
+    window.location.href = "/admin/login";
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-surface-alt">
+        <p className="text-text-muted">Redirecting...</p>
+      </div>
+    );
+  }
 
   if (status === "loading") {
     return (
       <div className="min-h-screen flex items-center justify-center bg-surface-alt">
         <div className="flex flex-col items-center gap-4">
           <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-primary" />
-          <p className="text-sm text-text-muted">Loading dashboard...</p>
+          <p className="text-sm text-text-muted">Loading...</p>
         </div>
       </div>
     );
@@ -51,16 +51,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   if (!session) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-surface-alt">
-        <div className="flex flex-col items-center gap-4">
-          <p className="text-text-muted">Redirecting to login...</p>
-        </div>
+        <p className="text-text-muted">Please log in</p>
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-surface-alt flex">
-      {/* Mobile overlay */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black/40 z-40 lg:hidden backdrop-blur-sm"
@@ -68,7 +65,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         />
       )}
 
-      {/* Sidebar */}
       <aside
         className={cn(
           "fixed lg:static inset-y-0 left-0 z-50 w-72 bg-white border-r border-border transform transition-transform duration-300 ease-in-out lg:transform-none flex flex-col",
