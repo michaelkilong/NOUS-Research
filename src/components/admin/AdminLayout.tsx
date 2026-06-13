@@ -29,7 +29,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   // Use window.location for redirect to avoid Next.js router issues
   if (typeof window !== "undefined" && status === "unauthenticated" && pathname !== "/admin/login") {
-    window.location.href = "/admin/login";
+    window.location.href = "/login";
     return (
       <div className="min-h-screen flex items-center justify-center bg-surface-alt">
         <p className="text-text-muted">Redirecting...</p>
